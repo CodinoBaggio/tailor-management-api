@@ -1,18 +1,44 @@
 function doPost(e) {
-  const param = JSON.parse(e.postData.contents);
-  const year = param.year;
-  
-  // CSVデータを作成
-  const csv = createCsv(year);
+  try {
+    const param = JSON.parse(e.postData.contents);
+    const endpoint = param.endpoint;
+    const endpointParams = param.endpointParams;
+    Logger.log(endpoint);
 
-  // レスポンスを作成
-  var res = ContentService.createTextOutput();
+    let content = {};
+    switch (endpoint) {
+      case 'login':
+        content = Login(endpointParams.loginId, endpointParams.password);
+        break;
+      case 'verify-token':
+        content = VerifyToken(endpointParams.token);
+        break;
+      case 'orders':
+        content = GetOrders(endpointParams.roleId, endpointParams.shopId);
+        break;
+      case 'order':
+        content = GetOrder(endpointParams.orderId);
+        break;
+      default:
+        content = {
+          status: 'error',
+          message: 'unknowon endpoint',
+        };
+    }
 
-  //Mime TypeをJSONに設定
-  res.setMimeType(ContentService.MimeType.JSON);
-
-  //テキストをセットする
-  res.setContent(csv);
-
-  return res;
+    const output = ContentService.createTextOutput();
+    output.setMimeType(ContentService.MimeType.JSON);
+    output.setContent(JSON.stringify(content));
+    return output;
+  } catch (error) {
+    Logger.log(error);
+    const content = {
+      status: 'error',
+      message: error.message,
+    };
+    const output = ContentService.createTextOutput();
+    output.setMimeType(ContentService.MimeType.JSON);
+    output.setContent(JSON.stringify(content));
+    return output;
+  }
 }
