@@ -3,7 +3,7 @@ function doPost(e) {
     const param = JSON.parse(e.postData.contents);
     const endpoint = param.endpoint;
     const endpointParams = param.endpointParams;
-    Logger.log(endpoint);
+    // Logger.log(endpoint);
 
     let content = {};
     switch (endpoint) {
@@ -19,8 +19,8 @@ function doPost(e) {
       case 'order':
         content = getOrder(endpointParams.orderId);
         break;
-      case 'resources':
-        content = getResources();
+      case 'order-resources':
+        content = getOrderResources();
         break;
       default:
         content = {
