@@ -1,0 +1,45 @@
+function getResources() {
+  return {
+    status: 'success',
+    message: '',
+    payload: {
+      selectPattern1: [
+        { selectPattern1: 'TR1', parts: 'jaket' },
+        { selectPattern1: 'TR1P', parts: 'pants' },
+        { selectPattern1: 'TR1V', parts: 'vest' },
+      ],
+      selectPattern2: [
+        { selectPattern2: 'SY', selectPattern1: 'jaket' },
+        { selectPattern2: 'A', selectPattern1: 'jaket' },
+        { selectPattern2: 'AB', selectPattern1: 'jaket' },
+        { selectPattern2: 'BE', selectPattern1: 'jaket' },
+        { selectPattern2: 'JY', selectPattern1: 'jaket' },
+        { selectPattern2: 'YA', selectPattern1: 'jaket' },
+      ],
+      selectPattern3: [
+        { selectPattern3: 'SY3', selectPattern2: 'SY' },
+        { selectPattern3: 'SY4', selectPattern2: 'SY' },
+        { selectPattern3: 'SY5', selectPattern2: 'SY' },
+        { selectPattern3: 'SY6', selectPattern2: 'SY' },
+        { selectPattern3: 'SY7', selectPattern2: 'SY' },
+        { selectPattern3: 'SY8', selectPattern2: 'SY' },
+        { selectPattern3: 'SY9', selectPattern2: 'SY' },
+        { selectPattern3: 'SY10', selectPattern2: 'SY' },
+        { selectPattern3: 'SY11', selectPattern2: 'SY' },
+        { selectPattern3: 'SY12', selectPattern2: 'SY' },
+        { selectPattern3: 'SY13', selectPattern2: 'SY' },
+        { selectPattern3: 'SY14', selectPattern2: 'SY' },
+        { selectPattern3: 'SY15', selectPattern2: 'SY' },
+        { selectPattern3: 'SY16', selectPattern2: 'SY' },
+        { selectPattern3: 'SY17', selectPattern2: 'SY' },
+        { selectPattern3: 'SY18', selectPattern2: 'SY' },
+        { selectPattern3: 'A3', selectPattern2: 'A' },
+        { selectPattern3: 'A4', selectPattern2: 'A' },
+        { selectPattern3: 'A5', selectPattern2: 'A' },
+        { selectPattern3: 'A6', selectPattern2: 'A' },
+        { selectPattern3: 'A7', selectPattern2: 'A' },
+        { selectPattern3: 'A8', selectPattern2: 'A' },
+      ],
+    },
+  };
+}

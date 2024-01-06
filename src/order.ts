@@ -1,4 +1,4 @@
-function GetOrders(roleId: string, shopId: string) {
+function getOrders(roleId: string, shopId: string) {
   const content = {
     status: 'success',
     message: '',
@@ -6,6 +6,7 @@ function GetOrders(roleId: string, shopId: string) {
       orders: [
         {
           orderId: '123456789',
+          shopId: '987654321',
           seq: 1,
           orderStatus: '発注済み',
           inputDate: '2024-01-01',
@@ -36,6 +37,7 @@ function GetOrders(roleId: string, shopId: string) {
         },
         {
           orderId: '987654321',
+          shopId: '987654321',
           seq: 1,
           orderStatus: '保存',
           inputDate: '2024-01-01',
@@ -70,7 +72,7 @@ function GetOrders(roleId: string, shopId: string) {
   return content;
 }
 
-function GetOrder(orderId: string) {
+function getOrder(orderId: string) {
   if (orderId === '123456789') {
     return {
       status: 'success',
@@ -78,6 +80,7 @@ function GetOrder(orderId: string) {
       payload: {
         order: {
           orderId: '123456789',
+          shopId: '987654321',
           seq: 1,
           orderStatus: '発注済み',
           inputDate: '2024-01-01',
@@ -115,6 +118,7 @@ function GetOrder(orderId: string) {
       payload: {
         order: {
           orderId: '987654321',
+          shopId: '987654321',
           seq: 1,
           orderStatus: '保存',
           inputDate: '2024-01-01',

@@ -1,4 +1,4 @@
-function Login(loginId: string, password: string) {
+function login(loginId: string, password: string) {
   return {
     status: 'success',
     message: '',
@@ -8,7 +8,7 @@ function Login(loginId: string, password: string) {
   };
 }
 
-function VerifyToken(token: string) {
+function verifyToken(token: string) {
   return {
     status: 'success',
     message: '',

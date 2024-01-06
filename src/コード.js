@@ -8,16 +8,19 @@ function doPost(e) {
     let content = {};
     switch (endpoint) {
       case 'login':
-        content = Login(endpointParams.loginId, endpointParams.password);
+        content = login(endpointParams.loginId, endpointParams.password);
         break;
       case 'verify-token':
-        content = VerifyToken(endpointParams.token);
+        content = verifyToken(endpointParams.token);
         break;
       case 'orders':
-        content = GetOrders(endpointParams.roleId, endpointParams.shopId);
+        content = getOrders(endpointParams.roleId, endpointParams.shopId);
         break;
       case 'order':
-        content = GetOrder(endpointParams.orderId);
+        content = getOrder(endpointParams.orderId);
+        break;
+      case 'resources':
+        content = getResources();
         break;
       default:
         content = {
