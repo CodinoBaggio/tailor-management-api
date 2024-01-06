@@ -24,8 +24,8 @@ function GetOrders(roleId: string, shopId: string) {
           blendRate2: 30,
           jaket: {
             jaketOrderId: '123',
-            totalHeight: 80,
-            jaketHeight: 75,
+            totalLength: 80,
+            jaketLength: 75,
           },
           pants: {
             pantsOrderId: '456',
@@ -54,8 +54,8 @@ function GetOrders(roleId: string, shopId: string) {
           blendRate2: 30,
           jaket: {
             jaketOrderId: '987',
-            totalHeight: 80,
-            jaketHeight: 75,
+            totalLength: 80,
+            jaketLength: 75,
           },
           pants: {
             pantsOrderId: '654',
@@ -96,8 +96,8 @@ function GetOrder(orderId: string) {
           blendRate2: 30,
           jaket: {
             jaketOrderId: '123',
-            totalHeight: 80,
-            jaketHeight: 75,
+            totalLength: 80,
+            jaketLength: 75,
           },
           pants: {
             pantsOrderId: '456',
@@ -133,8 +133,8 @@ function GetOrder(orderId: string) {
           blendRate2: 30,
           jaket: {
             jaketOrderId: '987',
-            totalHeight: 80,
-            jaketHeight: 75,
+            totalLength: 80,
+            jaketLength: 75,
           },
           pants: {
             pantsOrderId: '654',
