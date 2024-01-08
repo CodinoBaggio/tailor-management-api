@@ -26,8 +26,8 @@ function getOrders(roleId: string, shopId: string) {
           jaket: {
             jaketOrderId: '123',
             selectPattern1: 'TR1',
-            selectPattern2: 'SY',
-            selectPattern3: 'SY3',
+            selectPattern2: 'A',
+            selectPattern3: 'A4',
             totalLength: 10,
             jaketLength: 10,
             shoulderWidth: 10,
@@ -217,8 +217,8 @@ function getOrders(roleId: string, shopId: string) {
           jaket: {
             jaketOrderId: '123',
             selectPattern1: 'TR1',
-            selectPattern2: 'SY',
-            selectPattern3: 'SY3',
+            selectPattern2: 'A',
+            selectPattern3: 'A4',
             totalLength: 10,
             jaketLength: 10,
             shoulderWidth: 10,
@@ -420,8 +420,8 @@ function getOrder(orderId: string) {
           jaket: {
             jaketOrderId: '123',
             selectPattern1: 'TR1',
-            selectPattern2: 'SY',
-            selectPattern3: 'SY3',
+            selectPattern2: 'A',
+            selectPattern3: 'A4',
             totalLength: 10,
             jaketLength: 10,
             shoulderWidth: 10,
@@ -618,8 +618,8 @@ function getOrder(orderId: string) {
           jaket: {
             jaketOrderId: '123',
             selectPattern1: 'TR1',
-            selectPattern2: 'SY',
-            selectPattern3: 'SY3',
+            selectPattern2: 'A',
+            selectPattern3: 'A4',
             totalLength: 10,
             jaketLength: 10,
             shoulderWidth: 10,
