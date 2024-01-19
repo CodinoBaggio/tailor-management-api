@@ -22,6 +22,9 @@ function doPost(e) {
       case 'order-resources':
         content = getOrderResources();
         break;
+      case 'create-order':
+        content = createOrder(endpointParams.order);
+        break;
       default:
         content = {
           status: 'error',

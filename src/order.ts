@@ -29,12 +29,19 @@ function getOrder(orderId: string) {
   }
 }
 
-function createOrder(order: any) {
+function createOrder(order: OrderBasisType) {
+  let status = 'success';
+  let message = '登録が完了しました。';
+  if (order.jaket.selectPattern1 === '') {
+    status = 'error';
+    message = 'ジャケットのセレクトパターンを選択してください。';
+  }
+
   return {
-    status: 'success',
-    message: '',
+    status: status,
+    message: message,
     payload: {
-      orderId: '123456789',
+      orderId: 'ok google',
     },
   };
 }
