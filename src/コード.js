@@ -25,6 +25,9 @@ function doPost(e) {
       case 'create-order':
         content = createOrder(endpointParams.order);
         break;
+      case 'save-order':
+        content = saveOrder(endpointParams.order);
+        break;
       default:
         content = {
           status: 'error',

@@ -15,6 +15,10 @@ type OrderBasisType = {
   blendRate1: number;
   blendRateFabric2: string;
   blendRate2: number;
+  blendRateFabric3: string;
+  blendRate3: number;
+  blendRateFabric4: string;
+  blendRate4: number;
   inputLoginId: string;
   isDelete: bit;
   createDateTime: datetime;

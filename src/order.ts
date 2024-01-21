@@ -45,3 +45,20 @@ function createOrder(order: OrderBasisType) {
     },
   };
 }
+
+function saveOrder(order: OrderBasisType) {
+  let status = 'success';
+  let message = '保存しました。';
+  if (order.jaket.selectPattern1 === '') {
+    status = 'error';
+    message = 'ジャケットのセレクトパターンを選択してください。';
+  }
+
+  return {
+    status: status,
+    message: message,
+    payload: {
+      orderId: order.orderId,
+    },
+  };
+}
