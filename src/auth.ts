@@ -18,7 +18,7 @@ function verifyToken(token: string) {
         userName: '東　顕正',
         shopId: '10000',
         shopName: 'テーラー池田',
-        roleId: '0',
+        roleId: '00',
       },
     },
   };
