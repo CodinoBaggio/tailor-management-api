@@ -81,3 +81,25 @@ function getOrderResources() {
     },
   };
 }
+
+function getFabricProductNos(productName: string, searchPattern: string) {
+  const content = {
+    status: 'success',
+    message: '',
+    payload: {
+      productNos: [
+        'X00001',
+        'X00002',
+        'X00003',
+        'X00004',
+        'X00005',
+        'X00006',
+        'X00007',
+        'X00008',
+        'X00009',
+        'X00010',
+      ],
+    },
+  };
+  return content;
+}
