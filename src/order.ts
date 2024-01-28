@@ -1,9 +1,12 @@
 function getOrders(roleId: string, shopId: string) {
+  // sampleOrder1を25件、sampleOrder2を25件返す
+  const sample1s = Array(25).fill(sampleOrder1);
+  const sample2s = Array(25).fill(sampleOrder2);
   const content = {
     status: 'success',
     message: '',
     payload: {
-      orders: [sampleOrder1, sampleOrder2],
+      orders: [...sample1s, ...sample2s],
     },
   };
   return content;
