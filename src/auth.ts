@@ -1,4 +1,4 @@
-function login(loginId: string, password: string) {
+function login(userId: string, password: string) {
   return {
     status: 'success',
     message: '',
@@ -14,11 +14,13 @@ function verifyToken(token: string) {
     message: '',
     payload: {
       user: {
-        loginId: '10000',
+        userId: '10000',
         userName: '東　顕正',
         shopId: '10000',
         shopName: 'テーラー池田',
         roleId: '00',
+        shopGroup: 'JY',
+        shopNo: '777',
       },
     },
   };

@@ -19,7 +19,7 @@ type OrderBasisType = {
   blendRate3: number;
   blendRateFabric4: string;
   blendRate4: number;
-  inputLoginId: string;
+  inputUserId: string;
   isDelete: bit;
   createDateTime: datetime;
   createUserId: string;
