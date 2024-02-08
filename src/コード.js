@@ -22,14 +22,23 @@ function doPost(e) {
       case 'order-resources':
         content = getOrderResources();
         break;
-        case 'fabric-product-no':
-          content = getFabricProductNos(endpointParams.productName, endpointParams.searchPattern);
-          break;
-        case 'create-order':
+      case 'fabric-product-no':
+        content = getFabricProductNos(
+          endpointParams.productName,
+          endpointParams.searchPattern
+        );
+        break;
+      case 'create-order':
         content = createOrder(endpointParams.order);
         break;
       case 'save-order':
         content = saveOrder(endpointParams.order);
+        break;
+      case 'shops':
+        content = getShops();
+        break;
+      case 'shop':
+        content = getShop(endpointParams.shopId);
         break;
       default:
         content = {
