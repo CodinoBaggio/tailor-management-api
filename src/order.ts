@@ -49,7 +49,7 @@ function createOrder(order: OrderBasisType) {
   };
 }
 
-function saveOrder(order: OrderBasisType) {
+function updateOrder(order: OrderBasisType) {
   let status = 'success';
   let message = '保存しました。';
   if (order.jaket.selectPattern1 === '') {

@@ -406,6 +406,48 @@ const sampleOrder2: OrderBasisType = {
   },
 };
 
+const userSample1: UserType = {
+  userId: '11',
+  password: 'password',
+  userName: '池田　晴彦',
+  userNameKana: 'イケダ　ハルヒコ',
+  allowLogin: true,
+  roleId: '00',
+  isDelete: false,
+  createDateTime: '2024-01-01',
+  createUserId: '10000',
+  updateDateTime: '2024-01-01',
+  updateUserId: '10000',
+};
+
+const userSample2: UserType = {
+  userId: '12',
+  password: 'password',
+  userName: '東　顕正',
+  userNameKana: 'ヒガシ　ケンショウ',
+  allowLogin: true,
+  roleId: '00',
+  isDelete: false,
+  createDateTime: '2024-01-01',
+  createUserId: '10000',
+  updateDateTime: '2024-01-01',
+  updateUserId: '10000',
+};
+
+const userSample3: UserType = {
+  userId: '21',
+  password: 'password',
+  userName: '井谷　和博',
+  userNameKana: 'イタニ　カズヒロ',
+  allowLogin: true,
+  roleId: '00',
+  isDelete: false,
+  createDateTime: '2024-01-01',
+  createUserId: '10000',
+  updateDateTime: '2024-01-01',
+  updateUserId: '10000',
+};
+
 const shopSample1: ShopType = {
   shopId: '123456789',
   shopName: 'テーラー池田',
@@ -422,50 +464,7 @@ const shopSample1: ShopType = {
   createUserId: '10000',
   updateDateTime: '2024-01-01',
   updateUserId: '10000',
-  chargePersons: [
-    {
-      chargePersonId: '1',
-      shopId: '123456789',
-      user: {
-        userId: '11',
-        userName: '池田　晴彦',
-        userNameKana: 'イケダ　ハルヒコ',
-        allowLogin: true,
-        roleId: '00',
-        isDelete: false,
-        createDateTime: '2024-01-01',
-        createUserId: '10000',
-        updateDateTime: '2024-01-01',
-        updateUserId: '10000',
-      },
-      isDelete: false,
-      createDateTime: '2024-01-01',
-      createUserId: '10000',
-      updateDateTime: '2024-01-01',
-      updateUserId: '10000',
-    },
-    {
-      chargePersonId: '2',
-      shopId: '123456789',
-      user: {
-        userId: '12',
-        userName: '東　顕正',
-        userNameKana: 'ヒガシ　ケンショウ',
-        allowLogin: true,
-        roleId: '00',
-        isDelete: false,
-        createDateTime: '2024-01-01',
-        createUserId: '10000',
-        updateDateTime: '2024-01-01',
-        updateUserId: '10000',
-      },
-      isDelete: false,
-      createDateTime: '2024-01-01',
-      createUserId: '10000',
-      updateDateTime: '2024-01-01',
-      updateUserId: '10000',
-    },
-  ],
+  chargePersons: [],
 };
 
 const shopSample2: ShopType = {
@@ -484,27 +483,38 @@ const shopSample2: ShopType = {
   createUserId: '10000',
   updateDateTime: '2024-01-01',
   updateUserId: '10000',
-  chargePersons: [
-    {
-      chargePersonId: '1',
-      shopId: '987654321',
-      user: {
-        userId: '21',
-        userName: '井谷　和博',
-        userNameKana: 'イタニ　カズヒロ',
-        allowLogin: true,
-        roleId: '00',
-        isDelete: false,
-        createDateTime: '2024-01-01',
-        createUserId: '10000',
-        updateDateTime: '2024-01-01',
-        updateUserId: '10000',
-      },
-      isDelete: false,
-      createDateTime: '2024-01-01',
-      createUserId: '10000',
-      updateDateTime: '2024-01-01',
-      updateUserId: '10000',
-    },
-  ],
+  chargePersons: [],
+};
+
+const chargePersonSample1: ChargePersonType = {
+  chargePersonId: '1',
+  shop: shopSample1,
+  user: userSample1,
+  isDelete: false,
+  createDateTime: '2024-01-01',
+  createUserId: '10000',
+  updateDateTime: '2024-01-01',
+  updateUserId: '10000',
+};
+
+const chargePersonSample2: ChargePersonType = {
+  chargePersonId: '2',
+  shop: shopSample1,
+  user: userSample2,
+  isDelete: false,
+  createDateTime: '2024-01-01',
+  createUserId: '10000',
+  updateDateTime: '2024-01-01',
+  updateUserId: '10000',
+};
+
+const chargePersonSample3: ChargePersonType = {
+  chargePersonId: '3',
+  shop: shopSample2,
+  user: userSample3,
+  isDelete: false,
+  createDateTime: '2024-01-01',
+  createUserId: '10000',
+  updateDateTime: '2024-01-01',
+  updateUserId: '10000',
 };

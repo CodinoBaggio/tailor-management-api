@@ -31,14 +31,38 @@ function doPost(e) {
       case 'create-order':
         content = createOrder(endpointParams.order);
         break;
-      case 'save-order':
-        content = saveOrder(endpointParams.order);
+      case 'update-order':
+        content = updateOrder(endpointParams.order);
         break;
       case 'shops':
         content = getShops();
         break;
       case 'shop':
         content = getShop(endpointParams.shopId);
+        break;
+      case 'create-shop':
+        content = createShop(endpointParams.shop);
+        break;
+      case 'update-shop':
+        content = updateShop(endpointParams.shop);
+        break;
+      case 'delete-shop':
+        content = deleteShop(endpointParams.shopId);
+        break;
+      case 'users':
+        content = getUsers();
+        break;
+      case 'user':
+        content = getUser(endpointParams.userId);
+        break;
+      case 'create-user':
+        content = createUser(endpointParams.user);
+        break;
+      case 'update-user':
+        content = updateUser(endpointParams.user);
+        break;
+      case 'delete-user':
+        content = deleteUser(endpointParams.userId);
         break;
       default:
         content = {
