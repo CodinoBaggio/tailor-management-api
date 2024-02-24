@@ -64,6 +64,15 @@ function doPost(e) {
       case 'delete-user':
         content = deleteUser(endpointParams.userId);
         break;
+      case 'body-size':
+        content = getBodySize(endpointParams);
+        break;
+      case 'lining':
+        content = getLinings(endpointParams);
+        break;
+      case 'button-productno':
+        content = getLinings(endpointParams);
+        break;
       default:
         content = {
           status: 'error',

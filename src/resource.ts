@@ -103,3 +103,221 @@ function getFabricProductNos(productName: string, searchPattern: string) {
   };
   return content;
 }
+
+function getBodySize(param: any) {
+  const jaketSelectPattern2 = param.jaket.selectPattern2;
+  const jaketSelectPattern3 = param.jaket.selectPattern3;
+  const pantsSelectPattern2 = param.pants.selectPattern2;
+  const pantsSelectPattern3 = param.pants.selectPattern3;
+  const vestSelectPattern2 = param.vest.selectPattern2;
+  const vestSelectPattern3 = param.vest.selectPattern3;
+
+  const content = {
+    status: 'success',
+    message: '',
+    payload: {
+      jaket: {
+        shoulderWidth: 42.4,
+        jaketLength: 70.0,
+      },
+      pants: {
+        shoulderWidth: 42.4,
+        jaketLength: 70.0,
+      },
+      vest: {
+        shoulderWidth: 42.4,
+        jaketLength: 70.0,
+      },
+    },
+  };
+  return content;
+}
+
+function getLinings(param: any) {
+  const fabricProductNo = param.fabricProductNo;
+  const searchPattern = param.searchPattern;
+  const specificFabricProductNos = [
+    'ATJ1546',
+    'ATJ1547',
+    'ATJ1548',
+    'ATJ1549',
+    'ATJ1828',
+    'ATJ1522',
+    'ATJ1523',
+    'ATJ1524',
+    'ATJ1528',
+    'ATJ1529',
+    'ATJ1738',
+    'ATJ1740',
+    'ATJ1741',
+    'ATJ1742',
+    'ATJ1802',
+    'ATJ1804',
+    'ATJ1805',
+    'ATJ1806',
+    'ATJ1807',
+    'ATJ1809',
+    'ATJ1826',
+    'ATJ1827',
+    'ATJ1829',
+    'ATJ1830',
+    'ATJ1865',
+    'ATJ1873',
+    'ATJ1874',
+    'ATJ1875',
+    'ATJ2006',
+    'ATJ2007',
+    'ATJ2008',
+    'ATJ2015',
+    'ATJ2016',
+    'ATJ2037',
+    'ATJ2038',
+    'ATJ2040',
+    'ATJ2041',
+    'ATJ2042',
+    'ATJ2043',
+    'ZE500',
+    'ZE502',
+    'ZE503',
+    'ZE504',
+    'ZE508',
+    'ZE511',
+    'ZE512',
+    'ZE513',
+    'ZE514',
+    'ZE515',
+    'ZE516',
+    'ZE517',
+    'ZK518',
+    'ZK519',
+    'ZK520',
+    'ZK521',
+    'ZK522',
+    'ZK523',
+    'ZK524',
+    'ZK525',
+    'ZK526',
+    'ZK527',
+    'ZE532',
+    'ZE533',
+    'ZE534',
+    'ZE535',
+    'ZE536',
+    'ZE537',
+    'ZE538',
+    'ZE539',
+    'ZE540',
+    'ZE541',
+    'ZE542',
+    'ZE543',
+    'ZE544',
+    'ATJ1530',
+    'ATJ1543',
+    'ATJ1544',
+  ];
+  const specificLings = specificFabricProductNos.includes(fabricProductNo)
+    ? ['FF10', 'FF20', 'FF00']
+    : ['XXX', 'YYY', 'ZZZ'];
+  const content = {
+    status: 'success',
+    message: '',
+    payload: {
+      linings: specificLings.filter((item) => item.includes(searchPattern)),
+    },
+  };
+  return content;
+}
+
+function getButtonProductNos(param: any) {
+  const fabricProductNo = param.fabricProductNo;
+  const specificFabricProductNos = [
+    'ATJ1546',
+    'ATJ1547',
+    'ATJ1548',
+    'ATJ1549',
+    'ATJ1828',
+    'ATJ1522',
+    'ATJ1523',
+    'ATJ1524',
+    'ATJ1528',
+    'ATJ1529',
+    'ATJ1738',
+    'ATJ1740',
+    'ATJ1741',
+    'ATJ1742',
+    'ATJ1802',
+    'ATJ1804',
+    'ATJ1805',
+    'ATJ1806',
+    'ATJ1807',
+    'ATJ1809',
+    'ATJ1826',
+    'ATJ1827',
+    'ATJ1829',
+    'ATJ1830',
+    'ATJ1865',
+    'ATJ1873',
+    'ATJ1874',
+    'ATJ1875',
+    'ATJ2006',
+    'ATJ2007',
+    'ATJ2008',
+    'ATJ2015',
+    'ATJ2016',
+    'ATJ2037',
+    'ATJ2038',
+    'ATJ2040',
+    'ATJ2041',
+    'ATJ2042',
+    'ATJ2043',
+    'ZE500',
+    'ZE502',
+    'ZE503',
+    'ZE504',
+    'ZE508',
+    'ZE511',
+    'ZE512',
+    'ZE513',
+    'ZE514',
+    'ZE515',
+    'ZE516',
+    'ZE517',
+    'ZK518',
+    'ZK519',
+    'ZK520',
+    'ZK521',
+    'ZK522',
+    'ZK523',
+    'ZK524',
+    'ZK525',
+    'ZK526',
+    'ZK527',
+    'ZE532',
+    'ZE533',
+    'ZE534',
+    'ZE535',
+    'ZE536',
+    'ZE537',
+    'ZE538',
+    'ZE539',
+    'ZE540',
+    'ZE541',
+    'ZE542',
+    'ZE543',
+    'ZE544',
+    'ATJ1530',
+    'ATJ1543',
+    'ATJ1544',
+  ];
+  const specificLings = specificFabricProductNos.includes(fabricProductNo)
+    ? ['FF10', 'FF20', 'FF00']
+    : ['XXX', 'YYY', 'ZZZ'];
+  const content = {
+    status: 'success',
+    message: '',
+    payload: {
+      linings: specificLings,
+    },
+  };
+  return content;
+}

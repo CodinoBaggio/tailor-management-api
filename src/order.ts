@@ -6,7 +6,7 @@ function getOrders(roleId: string, shopId: string) {
     status: 'success',
     message: '',
     payload: {
-      orders: [...sample1s, ...sample2s],
+      orders: [...sample2s, ...sample1s],
     },
   };
   return content;
