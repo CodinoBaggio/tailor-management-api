@@ -22,17 +22,17 @@ function doPost(e) {
       case 'order-resources':
         content = getOrderResources();
         break;
-      case 'fabric-product-no':
+      case 'fabric-product-nos':
         content = getFabricProductNos(
           endpointParams.productName,
           endpointParams.searchPattern
         );
         break;
-      case 'create-order':
-        content = createOrder(endpointParams.order);
+      case 'upsert-order':
+        content = upsertOrder(endpointParams.order);
         break;
-      case 'update-order':
-        content = updateOrder(endpointParams.order);
+      case 'delete-order':
+        content = deleteOrder(endpointParams.orderId);
         break;
       case 'shops':
         content = getShops();

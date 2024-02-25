@@ -32,36 +32,28 @@ function getOrder(orderId: string) {
   }
 }
 
-function createOrder(order: OrderBasisType) {
+function upsertOrder(order: OrderBasisType) {
   let status = 'success';
-  let message = '登録が完了しました。';
-  if (order.jaket.selectPattern1 === '') {
-    status = 'error';
-    message = 'ジャケットのセレクトパターンを選択してください。';
-  }
+  let message = '登録しました。';
 
   return {
     status: status,
     message: message,
     payload: {
-      orderId: 'ok google',
+      order: order,
     },
   };
 }
 
-function updateOrder(order: OrderBasisType) {
+function deleteOrder(orderId: string) {
   let status = 'success';
-  let message = '保存しました。';
-  if (order.jaket.selectPattern1 === '') {
-    status = 'error';
-    message = 'ジャケットのセレクトパターンを選択してください。';
-  }
+  let message = '削除しました。';
 
   return {
     status: status,
     message: message,
     payload: {
-      orderId: order.orderId,
+      orderId: orderId,
     },
   };
 }
