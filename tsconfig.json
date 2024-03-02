@@ -17,5 +17,6 @@
   },
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules"],
-  "compileOnSave": false
+  "compileOnSave": false,
+  "types": ["google-apps-script"]
 }
