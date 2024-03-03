@@ -18,7 +18,7 @@ function login(userId: string, password: string) {
   // パスワードチェック
   results.next();
   const dbPassword = results.getString('password');
-  if (password === dbPassword) {
+  if (password !== dbPassword) {
     return {
       status: 'error',
       message: 'パスワードが違います',
