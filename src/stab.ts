@@ -421,11 +421,13 @@ const userSample1: UserType = {
   userNameKana: 'イケダ　ハルヒコ',
   allowLogin: true,
   roleId: '00',
-  isDelete: false,
-  createDateTime: '2024-01-01',
-  createUserId: '10000',
-  updateDateTime: '2024-01-01',
-  updateUserId: '10000',
+  commonItem: {
+    isDelete: false,
+    createDateTime: '2024-01-01',
+    createUserId: '10000',
+    updateDateTime: '2024-01-01',
+    updateUserId: '10000',
+  },
 };
 
 const userSample2: UserType = {
@@ -435,11 +437,13 @@ const userSample2: UserType = {
   userNameKana: 'ヒガシ　ケンショウ',
   allowLogin: true,
   roleId: '00',
-  isDelete: false,
-  createDateTime: '2024-01-01',
-  createUserId: '10000',
-  updateDateTime: '2024-01-01',
-  updateUserId: '10000',
+  commonItem: {
+    isDelete: false,
+    createDateTime: '2024-01-01',
+    createUserId: '10000',
+    updateDateTime: '2024-01-01',
+    updateUserId: '10000',
+  },
 };
 
 const userSample3: UserType = {
@@ -449,11 +453,13 @@ const userSample3: UserType = {
   userNameKana: 'イタニ　カズヒロ',
   allowLogin: true,
   roleId: '00',
-  isDelete: false,
-  createDateTime: '2024-01-01',
-  createUserId: '10000',
-  updateDateTime: '2024-01-01',
-  updateUserId: '10000',
+  commonItem: {
+    isDelete: false,
+    createDateTime: '2024-01-01',
+    createUserId: '10000',
+    updateDateTime: '2024-01-01',
+    updateUserId: '10000',
+  },
 };
 
 const shopSample1: ShopType = {
@@ -467,11 +473,13 @@ const shopSample1: ShopType = {
   address: '1-22-5',
   building: 'イオリドリーム103',
   isOwn: true,
-  isDelete: false,
-  createDateTime: '2024-01-01',
-  createUserId: '10000',
-  updateDateTime: '2024-01-01',
-  updateUserId: '10000',
+  commonItem: {
+    isDelete: false,
+    createDateTime: '2024-01-01',
+    createUserId: '10000',
+    updateDateTime: '2024-01-01',
+    updateUserId: '10000',
+  },
   chargePersons: [],
 };
 
@@ -486,11 +494,13 @@ const shopSample2: ShopType = {
   address: '1-10-1',
   building: 'XXXビルディング4F',
   isOwn: false,
-  isDelete: false,
-  createDateTime: '2024-01-01',
-  createUserId: '10000',
-  updateDateTime: '2024-01-01',
-  updateUserId: '10000',
+  commonItem: {
+    isDelete: false,
+    createDateTime: '2024-01-01',
+    createUserId: '10000',
+    updateDateTime: '2024-01-01',
+    updateUserId: '10000',
+  },
   chargePersons: [],
 };
 
@@ -498,31 +508,37 @@ const chargePersonSample1: ChargePersonType = {
   chargePersonId: '1',
   shop: shopSample1,
   user: userSample1,
-  isDelete: false,
-  createDateTime: '2024-01-01',
-  createUserId: '10000',
-  updateDateTime: '2024-01-01',
-  updateUserId: '10000',
+  commonItem: {
+    isDelete: false,
+    createDateTime: '2024-01-01',
+    createUserId: '10000',
+    updateDateTime: '2024-01-01',
+    updateUserId: '10000',
+  },
 };
 
 const chargePersonSample2: ChargePersonType = {
   chargePersonId: '2',
   shop: shopSample1,
   user: userSample2,
-  isDelete: false,
-  createDateTime: '2024-01-01',
-  createUserId: '10000',
-  updateDateTime: '2024-01-01',
-  updateUserId: '10000',
+  commonItem: {
+    isDelete: false,
+    createDateTime: '2024-01-01',
+    createUserId: '10000',
+    updateDateTime: '2024-01-01',
+    updateUserId: '10000',
+  },
 };
 
 const chargePersonSample3: ChargePersonType = {
   chargePersonId: '3',
   shop: shopSample2,
   user: userSample3,
-  isDelete: false,
-  createDateTime: '2024-01-01',
-  createUserId: '10000',
-  updateDateTime: '2024-01-01',
-  updateUserId: '10000',
+  commonItem: {
+    isDelete: false,
+    createDateTime: '2024-01-01',
+    createUserId: '10000',
+    updateDateTime: '2024-01-01',
+    updateUserId: '10000',
+  },
 };

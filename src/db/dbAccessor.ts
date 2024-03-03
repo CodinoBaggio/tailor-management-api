@@ -13,7 +13,7 @@ const jdbcConnection = () => {
 const dbUtils = {
   executeQuery: (conn: GoogleAppsScript.JDBC.JdbcConnection, sql: string) => {
     const stmt = conn.createStatement();
-    return stmt.executeQuery(sql);;
+    return stmt.executeQuery(sql);
   },
   executeUpdate: (conn: GoogleAppsScript.JDBC.JdbcConnection, sql: string) => {
     const stmt = conn.createStatement();

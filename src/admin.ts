@@ -224,8 +224,6 @@ function createUser(user: UserType): {
   payload: UserType | null;
 } {
   const conn = jdbcConnection();
-  const contents = {};
-
   try {
     const results = dbUtils.executeQuery(
       conn,
@@ -234,9 +232,11 @@ function createUser(user: UserType): {
     if (0 < dbUtils.rowsCount(results)) {
       return {
         status: 'error',
-        message: 'ユーザIDが重複しています',
+        message: 'すでに登録済みのユーザIDです',
         payload: null,
       };
+    } else {
+      user.userId = incrementSeq.nextUserSeq(conn);
     }
 
     dbUtils.executeUpdate(

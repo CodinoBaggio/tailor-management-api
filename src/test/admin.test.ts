@@ -1,16 +1,18 @@
 function test_createUser() {
   const user = {
-    userId: '00000',
+    userId: '(新規)',
     password: 'password',
-    userName: 'user1',
-    userNameKana: 'user1',
+    userName: '東　顕正',
+    userNameKana: 'ひがし　けんしょう',
     allowLogin: true,
-    roleId: 'admin',
-    isDelete: false,
-    createDateTime: '2021-01-01',
-    createUserId: 'user1',
-    updateDateTime: '2021-01-01',
-    updateUserId: 'user1',
+    roleId: '00',
+    commonItem: {
+      isDelete: false,
+      createDateTime: new Date(),
+      createUserId: 'admin',
+      updateDateTime: new Date(),
+      updateUserId: 'admin',
+    },
   };
 
   const content = createUser(user);
