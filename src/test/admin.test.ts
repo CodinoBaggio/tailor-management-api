@@ -13,7 +13,7 @@ function test_createUser() {
       updateDateTime: new Date(),
       updateUserId: 'admin',
     },
-  };
+    };
 
   const content = createUser(user);
   return content;

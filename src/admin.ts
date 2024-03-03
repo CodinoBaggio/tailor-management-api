@@ -236,9 +236,10 @@ function createUser(user: UserType): {
         payload: null,
       };
     } else {
-      user.userId = incrementSeq.nextUserSeq(conn);
+      user.userId = nextSeq.userSeq(conn);
     }
 
+    // m_userに登録
     dbUtils.executeUpdate(
       conn,
       `insert into m_user 
@@ -251,11 +252,32 @@ function createUser(user: UserType): {
         ${user.allowLogin ? 1 : 0}, 
         "${user.roleId}", 
         ${user.commonItem!.isDelete ? 1 : 0}, 
-        "${new Date()}", 
+        "${user.commonItem!.createDateTime}", 
         "${user.commonItem!.createUserId}", 
-        "${new Date()}", 
+        "${user.commonItem!.updateDateTime}", 
         "${user.commonItem!.updateUserId}")`
     );
+
+    if (user.shop && user.shop.shopId){
+      // m_chargePersonに登録
+      dbUtils.executeUpdate(
+        conn,
+        `insert into m_chargePerson 
+        (chargePersonId, userId, shopId, isDelete, createDateTime, createUserId, updateDateTime, updateUserId) 
+        values (
+          "${nextSeq.chargePersonSeq(conn)}", 
+          "${user.userId}", 
+          "${user.shop.shopId}", 
+          0, 
+          "${user.shop.commonItem!.createDateTime}", 
+          "${user.commonItem!.createUserId}", 
+          "${user.shop.commonItem!.updateDateTime}", 
+          "${user.commonItem!.updateUserId}")`
+      );
+    }
+
+    // コミット
+    conn.commit();
 
     return {
       status: 'success',
@@ -263,6 +285,9 @@ function createUser(user: UserType): {
       payload: user,
     };
   } catch (e: any) {
+    // ロールバック
+    conn.rollback();
+
     return {
       status: 'error',
       message: e.toString(),

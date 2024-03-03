@@ -7,5 +7,6 @@ const scriptProperty = (() => {
     connectionName: scriptProp.getProperty('connectionName')!,
     db: scriptProp.getProperty('db')!,
     ip: scriptProp.getProperty('ip')!,
+    privateKey: scriptProp.getProperty('privateKey')!,
   };
 })();
