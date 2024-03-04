@@ -111,10 +111,10 @@ const parseJwt = (jsonWebToken: string, privateKey: string) => {
     ).getDataAsString();
     const { exp, ...data } = JSON.parse(blob);
     if (new Date(exp * 1000) < new Date()) {
-      throw new Error('The token has expired');
+      throw new Error('トークンの期限が切れています');
     }
     return data;
   } else {
-    throw new Error('Invalid Signature');
+    throw new Error('不正なトークンです');
   }
 };
