@@ -8,7 +8,7 @@ function doPost(e) {
     let content = {};
     switch (endpoint) {
       case 'login':
-        content = login(endpointParams.loginId, endpointParams.password);
+        content = login(endpointParams.userId, endpointParams.password);
         break;
       case 'verify-token':
         content = verifyToken(endpointParams.token);

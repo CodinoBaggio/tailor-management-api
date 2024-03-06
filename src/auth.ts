@@ -2,7 +2,7 @@ function login(userId: string, password: string) {
   const conn = jdbcConnection();
   const results = dbUtils.executeQuery(
     conn,
-    `select password from \`tailor-db\`.m_user where userId = '${userId}' and isDelete = false and allowLogin = true`
+    `select password from \`tailor-db\`.m_user where userId = '${userId}' and isDelete = 0 and allowLogin = 1`
   );
 
   // ユーザーIDチェック
@@ -78,7 +78,7 @@ function verifyToken(token: string) {
         left join \`tailor-db\`.m_shop
         on m_chargePerson.shopId = m_shop.shopId
       where
-        userId = "${userId}" and isDelete = 0 and allowLogin = 1`
+      m_user.userId = "${userId}" and m_user.isDelete = 0 and m_user.allowLogin = 1`
     );
     if (dbUtils.rowsCount(results) === 0) {
       return {
