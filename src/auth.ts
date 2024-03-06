@@ -2,7 +2,7 @@ function login(userId: string, password: string) {
   const conn = jdbcConnection();
   const results = dbUtils.executeQuery(
     conn,
-    `select password from m_user where userId = '${userId}' and isDelete = false and allowLogin = true`
+    `select password from \`tailor-db\`.m_user where userId = '${userId}' and isDelete = false and allowLogin = true`
   );
 
   // ユーザーIDチェック
