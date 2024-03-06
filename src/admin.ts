@@ -114,7 +114,6 @@ function getUsers(): {
         left join \`tailor-db\`.m_shop
         on m_chargePerson.shopId = m_shop.shopId`
     );
-    const numCols = results.getMetaData().getColumnCount();
     const users: UserType[] = [];
     while (results.next()) {
       users.push({
