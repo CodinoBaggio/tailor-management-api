@@ -2,7 +2,17 @@ function login(userId: string, password: string) {
   const conn = jdbcConnection();
   const results = dbUtils.executeQuery(
     conn,
-    `select password from \`tailor-db\`.m_user where userId = '${userId}' and isDelete = 0 and allowLogin = 1`
+    `
+    select 
+      password,
+      allowLogin
+    from 
+      \`tailor-db\`.m_user 
+    where 
+      userId = '${userId}' 
+      and isDelete = 0 
+      #and allowLogin = 1
+    `
   );
 
   // ユーザーIDチェック
@@ -14,8 +24,18 @@ function login(userId: string, password: string) {
     };
   }
 
-  // パスワードチェック
+  // ログイン許可チェック
   results.next();
+  const allowLogin = Boolean(results.getString('allowLogin'));
+  if (!allowLogin) {
+    return {
+      status: 'error',
+      message: 'ログインが許可されていません',
+      payload: {},
+    };
+  }
+  
+  // パスワードチェック
   const dbPassword = results.getString('password');
   if (password !== dbPassword) {
     return {
@@ -44,33 +64,15 @@ function verifyToken(token: string) {
   try {
     const results = dbUtils.executeQuery(
       conn,
-      `select
+      `
+      select
         m_user.userId,
-        m_user.password,
         m_user.userName,
-        m_user.userNameKana,
-        m_user.allowLogin,
         m_user.roleId,
-        m_user.isDelete,
-        m_user.createDateTime,
-        m_user.createUserId,
-        m_user.updateDateTime,
-        m_user.updateUserId,
         m_shop.shopId,
         m_shop.shopName,
         m_shop.shopGroup,
-        m_shop.shopNo,
-        m_shop.postalCode,
-        m_shop.prefecture,
-        m_shop.city,
-        m_shop.address,
-        m_shop.building,
-        m_shop.isOwn,
-        m_shop.isDelete as shopIsDelete,
-        m_shop.createDateTime as shopCreateDateTime,
-        m_shop.createUserId as shopCreateUserId,
-        m_shop.updateDateTime as shopUpdateDateTime,
-        m_shop.updateUserId as shopUpdateUserId
+        m_shop.shopNo
       from
         \`tailor-db\`.m_user
         left join \`tailor-db\`.m_chargePerson
@@ -78,7 +80,10 @@ function verifyToken(token: string) {
         left join \`tailor-db\`.m_shop
         on m_chargePerson.shopId = m_shop.shopId
       where
-      m_user.userId = "${userId}" and m_user.isDelete = 0 and m_user.allowLogin = 1`
+        m_user.userId = "${userId}" 
+        and m_user.isDelete = 0 
+        and m_user.allowLogin = 1
+      `
     );
     if (dbUtils.rowsCount(results) === 0) {
       return {
@@ -112,31 +117,4 @@ function verifyToken(token: string) {
       payload: { user: null },
     };
   }
-  const results = dbUtils.executeQuery(
-    conn,
-    `select * from m_user where userId = "${userId}" and isDelete = 0`
-  );
-  if (dbUtils.rowsCount(results) === 0) {
-    return {
-      status: 'error',
-      message: 'ユーザが登録されていません',
-      payload: { user: null },
-    };
-  }
-
-  return {
-    status: 'success',
-    message: '',
-    payload: {
-      user: {
-        userId: '10000',
-        userName: '東　顕正',
-        shopId: '10000',
-        shopName: 'テーラー池田',
-        roleId: '00',
-        shopGroup: 'JY',
-        shopNo: '777',
-      },
-    },
-  };
 }

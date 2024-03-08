@@ -3,30 +3,24 @@ function doPost(e) {
     const param = JSON.parse(e.postData.contents);
     const endpoint = param.endpoint;
     const endpointParams = param.endpointParams;
-    // Logger.log(endpoint);
 
     let content = {};
     switch (endpoint) {
+      // #region Auth
       case 'login':
         content = login(endpointParams.userId, endpointParams.password);
         break;
       case 'verify-token':
         content = verifyToken(endpointParams.token);
         break;
+      // #endregion
+
+      // #region Order
       case 'orders':
         content = getOrders(endpointParams.roleId, endpointParams.shopId);
         break;
       case 'order':
         content = getOrder(endpointParams.orderId);
-        break;
-      case 'order-resources':
-        content = getOrderResources();
-        break;
-      case 'fabric-product-nos':
-        content = getFabricProductNos(
-          endpointParams.productName,
-          endpointParams.searchPattern
-        );
         break;
       case 'upsert-order':
         content = upsertOrder(endpointParams.order);
@@ -34,6 +28,9 @@ function doPost(e) {
       case 'delete-order':
         content = deleteOrder(endpointParams.orderId);
         break;
+      // #endregion
+
+      // #region Shop
       case 'shops':
         content = getShops();
         break;
@@ -49,6 +46,9 @@ function doPost(e) {
       case 'delete-shop':
         content = deleteShop(endpointParams.shopId);
         break;
+      // #endregion
+
+      // #region User
       case 'users':
         content = getUsers();
         break;
@@ -64,6 +64,18 @@ function doPost(e) {
       case 'delete-user':
         content = deleteUser(endpointParams.userId);
         break;
+      // #endregion
+
+      // #region Master
+      case 'select-pattern':
+        content = getSelectPatterns();
+        break;
+      case 'fabric-product-nos':
+        content = getFabricProductNos(
+          endpointParams.productName,
+          endpointParams.searchPattern
+        );
+        break;
       case 'body-size':
         content = getBodySize(endpointParams);
         break;
@@ -71,8 +83,10 @@ function doPost(e) {
         content = getLinings(endpointParams);
         break;
       case 'button-productno':
-        content = getLinings(endpointParams);
+        content = getButtonProductNos(endpointParams);
         break;
+      // #endregion
+
       default:
         content = {
           status: 'error',

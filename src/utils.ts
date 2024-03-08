@@ -1,42 +1,44 @@
 /*
  * DB関連のユーティリティ
  */
+const seq = (conn: GoogleAppsScript.JDBC.JdbcConnection, seqColumn: string): number => {
+  const results = dbUtils.executeQuery(
+    conn,
+    `select seq, ${seqColumn} from m_seq`
+  );
+  let ret = 1;
+  while (results.next()) {
+    const seq = results.getInt('seq');
+    const targetSeq = results.getInt(seqColumn) + 1;
+    dbUtils.executeUpdate(
+      conn,
+      `update m_seq set ${seqColumn} = ${targetSeq} where seq = ${seq}`
+    );
+    ret = targetSeq;
+    break;
+  }
+  return ret;
+}
+
 const nextSeq = {
   userSeq: (conn: GoogleAppsScript.JDBC.JdbcConnection): string => {
-    const results = dbUtils.executeQuery(
-      conn,
-      `select seq, userSeq from m_seq`
-    );
-    let ret = '00000';
-    while (results.next()) {
-      const seq = results.getInt('seq');
-      const userSeq = results.getInt('userSeq') + 1;
-      dbUtils.executeUpdate(
-        conn,
-        `update m_seq set userSeq = ${userSeq} where seq = ${seq}`
-      );
-      ret = userSeq.toString().padStart(5, '0');
-      break;
-    }
-    return ret;
+    const userSeq = seq(conn, 'userSeq');
+    return userSeq.toString().padStart(5, '0');
   },
   chargePersonSeq: (conn: GoogleAppsScript.JDBC.JdbcConnection): number => {
-    const results = dbUtils.executeQuery(
-      conn,
-      `select seq, chargePersonSeq from m_seq`
-    );
-    let ret = 1;
-    while (results.next()) {
-      const seq = results.getInt('seq');
-      const chargePersonSeq = results.getInt('chargePersonSeq') + 1;
-      dbUtils.executeUpdate(
-        conn,
-        `update m_seq set chargePersonSeq = ${chargePersonSeq} where seq = ${seq}`
-      );
-      ret = chargePersonSeq;
-      break;
-    }
-    return ret;
+    return seq(conn, 'chargePersonSeq');
+  },
+  orderSeq: (conn: GoogleAppsScript.JDBC.JdbcConnection): number => {
+    return seq(conn, 'orderSeq');
+  },
+  orderJaketSeq: (conn: GoogleAppsScript.JDBC.JdbcConnection): number => {
+    return seq(conn, 'orderJaketSeq');
+  },
+  orderPantsSeq: (conn: GoogleAppsScript.JDBC.JdbcConnection): number => {
+    return seq(conn, 'orderPantsSeq');
+  },
+  orderVestSeq: (conn: GoogleAppsScript.JDBC.JdbcConnection): number => {
+    return seq(conn, 'orderVestSeq');
   },
 };
 

@@ -23,3 +23,8 @@ function test_getUsers() {
   const content = getUsers();
   return content;
 }
+
+function test_getShops() {
+  const content = getShops();
+  return content;
+}

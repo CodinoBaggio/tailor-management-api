@@ -1,4 +1,4 @@
-function getOrderResources() {
+function getSelectPatterns() {
   return {
     status: 'success',
     message: '',

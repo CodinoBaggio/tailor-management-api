@@ -15,8 +15,8 @@ type ShopType = {
 
 type ChargePersonType = {
   chargePersonId: string;
-  shop: ShopType;
-  user: UserType;
+  shop?: ShopType;
+  user?: UserType;
   commonItem?: CommonItemType;
 };
 

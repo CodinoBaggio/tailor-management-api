@@ -26,9 +26,9 @@ type OrderBasisType = {
   createUserId: string;
   updateDateTime: datetime;
   updateUserId: string;
-  jaket: OrderJaketType;
-  pants: OrderPantsType;
-  vest: OrderVestType;
+  jaket?: OrderJaketType | null;
+  pants?: OrderPantsType | null;
+  vest?: OrderVestType | null;
 };
 
 type OrderJaketType = {
@@ -114,7 +114,7 @@ type OrderJaketType = {
   backWidth: number;
   sleeveBack: string;
   remark: string;
-  isDelete: boolean;
+  isDelete: bit;
   createDateTime: datetime;
   createUserId: string;
   updateDateTime: datetime;
@@ -167,7 +167,7 @@ type OrderPantsType = {
   creaseWire: string;
   buttholeTape: string;
   remark: string;
-  isDelete: boolean;
+  isDelete: bit;
   createDateTime: datetime;
   createUserId: string;
   updateDateTime: datetime;
@@ -205,7 +205,7 @@ type OrderVestType = {
   buttonPosition: number;
   frontLength: number;
   remark: string;
-  isDelete: boolean;
+  isDelete: bit;
   createDateTime: datetime;
   createUserId: string;
   updateDateTime: datetime;

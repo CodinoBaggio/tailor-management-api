@@ -7,7 +7,6 @@ const jdbcConnection = () => {
     scriptProperty.dbPassword
   );
   conn.setAutoCommit(false);
-
   return conn;
 };
 
