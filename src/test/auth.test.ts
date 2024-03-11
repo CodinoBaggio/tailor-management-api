@@ -1,4 +1,4 @@
 function test_login(){
-  const content = login('00000', 'admin');
+  const content = login('a', 'a');
   return content;
 }

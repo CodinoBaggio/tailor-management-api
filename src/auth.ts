@@ -4,14 +4,17 @@ function login(userId: string, password: string) {
     conn,
     `
     select 
-      password,
-      allowLogin
+      m_user.password,
+      m_user.allowLogin,
+      m_user.roleId,
+      m_chargePerson.shopId
     from 
-      \`tailor-db\`.m_user 
+      \`tailor-db\`.m_user
+      left join \`tailor-db\`.m_chargePerson
+      on m_user.userId = m_chargePerson.userId
     where 
-      userId = '${userId}' 
-      and isDelete = 0 
-      #and allowLogin = 1
+      m_user.userId = '${userId}' 
+      and m_user.isDelete = 0
     `
   );
 
@@ -26,7 +29,7 @@ function login(userId: string, password: string) {
 
   // ログイン許可チェック
   results.next();
-  const allowLogin = Boolean(results.getString('allowLogin'));
+  const allowLogin = Boolean(results.getString('m_user.allowLogin'));
   if (!allowLogin) {
     return {
       status: 'error',
@@ -36,7 +39,7 @@ function login(userId: string, password: string) {
   }
   
   // パスワードチェック
-  const dbPassword = results.getString('password');
+  const dbPassword = results.getString('m_user.password');
   if (password !== dbPassword) {
     return {
       status: 'error',
@@ -53,6 +56,8 @@ function login(userId: string, password: string) {
     message: '',
     payload: {
       token: token,
+      roleId: results.getString('m_user.roleId'),
+      shopId: results.getString('m_chargePerson.shopId'),
     },
   };
 }
