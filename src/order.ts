@@ -629,7 +629,7 @@ function upsertOrder(order: OrderBasisType) {
       order.orderId = nextSeq.orderSeq(conn).toString();
       const results = dbUtils.executeQuery(
         conn,
-        `select ifnull(max(seq), 0) as seq from \`tailor-db\`.t_order where orderId = '${order.shopId}'`
+        `select ifnull(max(seq), 0) as seq from \`tailor-db\`.t_order where shopId = '${order.shopId}'`
       );
       results.next();
       order.seq = results.getInt('seq') + 1;
