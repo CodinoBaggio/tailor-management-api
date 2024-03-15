@@ -638,32 +638,32 @@ function upsertOrder(order: OrderBasisType) {
     // t_orderに登録
     upsertOrderBasis(conn, order);
 
-    // // t_order_jaketに登録
-    // if (order.jaket) {
-    //   if (isNew) {
-    //     order.jaket.orderId = order.orderId;
-    //     order.jaket.jaketOrderId = nextSeq.orderJaketSeq(conn).toString();
-    //   }
-    //   upsertOrderJaket(conn, order.jaket);
-    // }
+    // t_order_jaketに登録
+    if (order.jaket) {
+      if (isNew) {
+        order.jaket.orderId = order.orderId;
+        order.jaket.jaketOrderId = nextSeq.orderJaketSeq(conn).toString();
+      }
+      upsertOrderJaket(conn, order.jaket);
+    }
 
-    // // t_order_pantsに登録
-    // if (order.pants) {
-    //   if (isNew) {
-    //     order.pants.orderId = order.orderId;
-    //     order.pants.pantsOrderId = nextSeq.orderPantsSeq(conn).toString();
-    //   }
-    //   upsertOrderPants(conn, order.pants);
-    // }
+    // t_order_pantsに登録
+    if (order.pants) {
+      if (isNew) {
+        order.pants.orderId = order.orderId;
+        order.pants.pantsOrderId = nextSeq.orderPantsSeq(conn).toString();
+      }
+      upsertOrderPants(conn, order.pants);
+    }
 
-    // // t_order_vestに登録
-    // if (order.vest) {
-    //   if (isNew) {
-    //     order.vest.orderId = order.orderId;
-    //     order.vest.vestOrderId = nextSeq.orderVestSeq(conn).toString();
-    //   }
-    //   upsertOrderVest(conn, order.vest);
-    // }
+    // t_order_vestに登録
+    if (order.vest) {
+      if (isNew) {
+        order.vest.orderId = order.orderId;
+        order.vest.vestOrderId = nextSeq.orderVestSeq(conn).toString();
+      }
+      upsertOrderVest(conn, order.vest);
+    }
 
     conn.commit();
 
