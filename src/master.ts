@@ -83,25 +83,45 @@ function getSelectPatterns() {
 }
 
 function getFabricProductNos(productName: string, searchPattern: string) {
-  const content = {
-    status: 'success',
-    message: '',
-    payload: {
-      productNos: [
-        'X00001',
-        'X00002',
-        'X00003',
-        'X00004',
-        'X00005',
-        'X00006',
-        'X00007',
-        'X00008',
-        'X00009',
-        'X00010',
-      ],
-    },
-  };
-  return content;
+  const conn = jdbcConnection();
+  try {
+    const sql = `
+      select 
+        fabricProductNo
+      from 
+        \`tailor-db\`.m_fabric_product_no 
+      where 
+        fabricProductNo like (CONCAT('%', ?, '%')) 
+    `;
+    const st = conn.prepareStatement(sql);
+    st.setObject(1, searchPattern);
+    const results = st.executeQuery();
+    const productNos: string[] = [];
+    while (results.next()) {
+      productNos.push(results.getString('fabricProductNo'));
+    }
+    if (productNos.length > 0) {
+      return {
+        status: 'success',
+        message: '',
+        payload: {
+          productNos: productNos,
+        },
+      };
+    } else {
+      return {
+        status: 'error',
+        message: '生地品番が見つかりません',
+        payload: { productNos: null },
+      };
+    }
+  } catch (error: any) {
+    return {
+      status: 'error',
+      message: error.toString(),
+      payload: { productNos: null },
+    };
+  }
 }
 
 function getBodySize(param: any) {
@@ -320,4 +340,52 @@ function getButtonProductNos(param: any) {
     },
   };
   return content;
+}
+
+function getPrice(param: any) {
+  const shopNo = param.shopNo;
+  const shopGroup = param.shopGroup;
+  const fabricProductNo = param.fabricProductNo;
+  const fabric = param.fabric;
+  const conn = jdbcConnection();
+  try {
+    const sql = `
+      select 
+        * 
+      from 
+        \`tailor-db\`.m_fabric_price 
+      where 
+        shopNo = ? 
+        and shopGroup = ?
+        and fabricProductNo = ?
+        and fabric = ?
+    `;
+    const st = conn.prepareStatement(sql);
+    st.setObject(1, shopNo);
+    st.setObject(2, shopGroup);
+    st.setObject(3, fabricProductNo);
+    st.setObject(4, fabric);
+    const results = st.executeQuery();
+    if (results.next()) {
+      return {
+        status: 'success',
+        message: '',
+        payload: {
+          price: results.getFloat('price'),
+        },
+      };
+    } else {
+      return {
+        status: 'error',
+        message: '価格が見つかりません',
+        payload: { price: null },
+      };
+    }
+  } catch (error: any) {
+    return {
+      status: 'error',
+      message: error.toString(),
+      payload: { price: null },
+    };
+  }
 }

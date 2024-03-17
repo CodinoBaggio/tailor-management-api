@@ -13,3 +13,13 @@ function test_getOrder() {
   const ret = getOrder('1');
   return ret;
 }
+
+function test_getPrice() {
+  const ret = getPrice({
+    shopNo: '1',
+    shopGroup: 'JV',
+    fabricProductNo: 'ATJ1522',
+    fabric: 'ゼニア',
+  });
+  return ret;
+}

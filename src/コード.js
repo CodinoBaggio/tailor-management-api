@@ -85,6 +85,9 @@ function doPost(e) {
       case 'button-productno':
         content = getButtonProductNos(endpointParams);
         break;
+      case 'order-price':
+        content = getPrice(endpointParams);
+        break;
       // #endregion
 
       default:
