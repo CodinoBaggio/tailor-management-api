@@ -71,10 +71,7 @@ function doPost(e) {
         content = getSelectPatterns();
         break;
       case 'fabric-product-nos':
-        content = getFabricProductNos(
-          endpointParams.productName,
-          endpointParams.searchPattern
-        );
+        content = getFabricProductNos(endpointParams.productName, endpointParams.searchPattern);
         break;
       case 'body-size':
         content = getBodySize(endpointParams);
@@ -112,4 +109,19 @@ function doPost(e) {
     output.setContent(JSON.stringify(content));
     return output;
   }
+}
+
+function test_doPost() {
+  const e = {
+    postData: {
+      contents: JSON.stringify({
+        endpoint: 'orders',
+        endpointParams: {
+          roleId: '00',
+          shopId: '1',
+        },
+      }),
+    },
+  };
+  const ret = doPost(e);
 }
