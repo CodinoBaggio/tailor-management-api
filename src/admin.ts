@@ -20,7 +20,7 @@ function getShops() {
         m_shop.createUserId as shopCreateUserId,
         m_shop.updateDateTime as shopUpdateDateTime,
         m_shop.updateUserId as shopUpdateUserId,
-        m_chargePerson.chargePersonId,
+        m_charge_person.chargePersonId,
         m_user.userId,
         m_user.password,
         m_user.userName,
@@ -34,10 +34,10 @@ function getShops() {
         m_user.updateUserId
       from
         \`tailor-db\`.m_shop
-        left join \`tailor-db\`.m_chargePerson
-        on m_shop.shopId = m_chargePerson.shopId
+        left join \`tailor-db\`.m_charge_person
+        on m_shop.shopId = m_charge_person.shopId
         left join \`tailor-db\`.m_user
-        on m_chargePerson.userId = m_user.userId
+        on m_charge_person.userId = m_user.userId
       `
     );
     const items: any[] = [];
@@ -246,10 +246,10 @@ function getUsers(): {
         m_shop.updateUserId as shopUpdateUserId
       from
         \`tailor-db\`.m_user
-        left join \`tailor-db\`.m_chargePerson
-        on m_user.userId = m_chargePerson.userId
+        left join \`tailor-db\`.m_charge_person
+        on m_user.userId = m_charge_person.userId
         left join \`tailor-db\`.m_shop
-        on m_chargePerson.shopId = m_shop.shopId
+        on m_charge_person.shopId = m_shop.shopId
       `
     );
     const users: UserType[] = [];
@@ -411,11 +411,11 @@ function createUser(user: UserType): {
     );
 
     if (user.shop && user.shop.shopId) {
-      // m_chargePersonに登録
+      // m_charge_personに登録
       dbUtils.executeUpdate(
         conn,
         `
-        insert into m_chargePerson 
+        insert into m_charge_person 
         (chargePersonId, userId, shopId, isDelete, createDateTime, createUserId, updateDateTime, updateUserId) 
         values (
           "${nextSeq.chargePersonSeq(conn)}", 

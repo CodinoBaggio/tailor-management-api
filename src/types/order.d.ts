@@ -1,3 +1,36 @@
+type OrderBasisShortType = {
+  orderId: string;
+  // shopId: string;
+  // seq: number;
+  orderStatus: string;
+  inputDate: datetime;
+  orderDateTime: datetime;
+  shipDate: datetime;
+  customerName: string;
+  productName: string;
+  fabricMaker: string;
+  fabricProductNo: string;
+  // yield: number;
+  // blendRateFabric1: string;
+  // blendRate1: number;
+  // blendRateFabric2: string;
+  // blendRate2: number;
+  // blendRateFabric3: string;
+  // blendRate3: number;
+  // blendRateFabric4: string;
+  // blendRate4: number;
+  // inputUserId: string;
+  // remark: string;
+  // isDelete: bit;
+  // createDateTime: datetime;
+  // createUserId: string;
+  // updateDateTime: datetime;
+  // updateUserId: string;
+  // jaket?: OrderJaketType | null;
+  // pants?: OrderPantsType | null;
+  // vest?: OrderVestType | null;
+};
+
 type OrderBasisType = {
   orderId: string;
   shopId: string;

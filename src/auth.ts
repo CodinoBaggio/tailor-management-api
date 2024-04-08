@@ -7,11 +7,11 @@ function login(userId: string, password: string) {
       m_user.password,
       m_user.allowLogin,
       m_user.roleId,
-      m_chargePerson.shopId
+      m_charge_person.shopId
     from 
       \`tailor-db\`.m_user
-      left join \`tailor-db\`.m_chargePerson
-      on m_user.userId = m_chargePerson.userId
+      left join \`tailor-db\`.m_charge_person
+      on m_user.userId = m_charge_person.userId
     where 
       m_user.userId = '${userId}' 
       and m_user.isDelete = 0
@@ -57,7 +57,7 @@ function login(userId: string, password: string) {
     payload: {
       token: token,
       roleId: results.getString('m_user.roleId'),
-      shopId: results.getString('m_chargePerson.shopId'),
+      shopId: results.getString('m_charge_person.shopId'),
     },
   };
 }
@@ -80,10 +80,10 @@ function verifyToken(token: string) {
         m_shop.shopNo
       from
         \`tailor-db\`.m_user
-        left join \`tailor-db\`.m_chargePerson
-        on m_user.userId = m_chargePerson.userId
+        left join \`tailor-db\`.m_charge_person
+        on m_user.userId = m_charge_person.userId
         left join \`tailor-db\`.m_shop
-        on m_chargePerson.shopId = m_shop.shopId
+        on m_charge_person.shopId = m_shop.shopId
       where
         m_user.userId = "${userId}" 
         and m_user.isDelete = 0 

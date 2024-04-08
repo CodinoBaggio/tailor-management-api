@@ -131,26 +131,58 @@ function getBodySize(param: any) {
   const pantsSelectPattern3 = param.pants.selectPattern3;
   const vestSelectPattern2 = param.vest.selectPattern2;
   const vestSelectPattern3 = param.vest.selectPattern3;
+  const conn = jdbcConnection();
 
-  const content = {
-    status: 'success',
-    message: '',
-    payload: {
-      jaket: {
-        shoulderWidth: 42.4,
-        jaketLength: 70.0,
-      },
-      pants: {
-        shoulderWidth: 42.4,
-        jaketLength: 70.0,
-      },
-      vest: {
-        shoulderWidth: 42.4,
-        jaketLength: 70.0,
-      },
-    },
-  };
-  return content;
+  try {
+    const sql = `
+      select 
+        shoulderWidth,
+        jaketLength
+      from 
+        \`tailor-db\`.m_size
+      where 
+        parts = 'jaket'
+        and selectPattern2 = ?
+        and selectPattern3 = ?
+    `;
+    const st = conn.prepareStatement(sql);
+    st.setObject(1, jaketSelectPattern2);
+    st.setObject(2, jaketSelectPattern3);
+    const results = st.executeQuery();
+    const sizes: { shoulderWidth: number; jaketLength: number }[] = [];
+    while (results.next()) {
+      sizes.push({
+        shoulderWidth: results.getShort('shoulderWidth'),
+        jaketLength: results.getShort('jaketLength'),
+      });
+    }
+    if (sizes.length > 0) {
+      return {
+        status: 'success',
+        message: '',
+        payload: {
+          jaket: {
+            shoulderWidth: sizes[0].shoulderWidth,
+            jaketLength: sizes[0].jaketLength,
+          },
+          pants: null,
+          vest: null,
+        },
+      };
+    } else {
+      return {
+        status: 'error',
+        message: '寸法が見つかりません',
+        payload: null,
+      };
+    }
+  } catch (error: any) {
+    return {
+      status: 'error',
+      message: error.toString(),
+      payload: null,
+    };
+  }
 }
 
 function getLinings(param: any) {
@@ -345,11 +377,55 @@ function getButtonProductNos(param: any) {
 function getPrice(param: any) {
   const shopNo = param.shopNo;
   const shopGroup = param.shopGroup;
-  const fabricProductNo = param.fabricProductNo;
-  const fabric = param.fabric;
   const conn = jdbcConnection();
+  const price = { fabricPrice: 0, wages: 0, customPrice: 0, totalPrice: 0 };
+
   try {
-    const sql = `
+    // 生地価格を取得
+    price.fabricPrice = getFabricPrice(conn, shopNo, shopGroup, param.fabricProductNo);
+
+    // 工賃を取得
+    price.wages = getWages(conn, shopGroup, param.productName);
+
+    // 仕様変更価格を取得
+    price.customPrice = 0;
+
+    // ボタン裏地価格を取得
+    const buttonPrice = 0;
+    price.customPrice += buttonPrice;
+
+    // スタブ
+    price.fabricPrice = 3000000;
+    price.wages = 2000000;
+    price.customPrice = 1000000;
+
+    // 合計金額を計算
+    price.totalPrice = price.fabricPrice + price.wages + price.customPrice;
+
+    return {
+      status: 'success',
+      message: '',
+      payload: {
+        price: price,
+      },
+    };
+  } catch (error: any) {
+    return {
+      status: 'error',
+      message: error.toString(),
+      payload: { price: null },
+    };
+  }
+}
+
+function getFabricPrice(
+  conn: GoogleAppsScript.JDBC.JdbcConnection,
+  shopNo: string,
+  shopGroup: string,
+  fabricProductNo: string
+) {
+  // 生地価格を取得
+  const sql = `
       select 
         * 
       from 
@@ -358,34 +434,29 @@ function getPrice(param: any) {
         shopNo = ? 
         and shopGroup = ?
         and fabricProductNo = ?
-        and fabric = ?
     `;
-    const st = conn.prepareStatement(sql);
-    st.setObject(1, shopNo);
-    st.setObject(2, shopGroup);
-    st.setObject(3, fabricProductNo);
-    st.setObject(4, fabric);
-    const results = st.executeQuery();
-    if (results.next()) {
-      return {
-        status: 'success',
-        message: '',
-        payload: {
-          price: results.getFloat('price'),
-        },
-      };
-    } else {
-      return {
-        status: 'error',
-        message: '価格が見つかりません',
-        payload: { price: null },
-      };
-    }
-  } catch (error: any) {
-    return {
-      status: 'error',
-      message: error.toString(),
-      payload: { price: null },
-    };
-  }
+  const st = conn.prepareStatement(sql);
+  st.setObject(1, shopNo);
+  st.setObject(2, shopGroup);
+  st.setObject(3, fabricProductNo);
+  const results = st.executeQuery();
+  return results.next() ? results.getFloat('price') : 0;
+}
+
+function getWages(conn: GoogleAppsScript.JDBC.JdbcConnection, shopGroup: string, productName: string) {
+  // 生地価格を取得
+  const sql = `
+      select 
+        * 
+      from 
+        \`tailor-db\`.m_wages 
+      where 
+        shopGroup = ?
+        and productName = ?
+    `;
+  const st = conn.prepareStatement(sql);
+  st.setObject(1, shopGroup);
+  st.setObject(2, productName);
+  const results = st.executeQuery();
+  return results.next() ? results.getFloat('wages') : 0;
 }
