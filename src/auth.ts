@@ -9,8 +9,8 @@ function login(userId: string, password: string) {
       m_user.roleId,
       m_charge_person.shopId
     from 
-      \`tailor-db\`.m_user
-      left join \`tailor-db\`.m_charge_person
+      \`tailor_db\`.m_user
+      left join \`tailor_db\`.m_charge_person
       on m_user.userId = m_charge_person.userId
     where 
       m_user.userId = '${userId}' 
@@ -37,7 +37,7 @@ function login(userId: string, password: string) {
       payload: {},
     };
   }
-  
+
   // パスワードチェック
   const dbPassword = results.getString('m_user.password');
   if (password !== dbPassword) {
@@ -79,10 +79,10 @@ function verifyToken(token: string) {
         m_shop.shopGroup,
         m_shop.shopNo
       from
-        \`tailor-db\`.m_user
-        left join \`tailor-db\`.m_charge_person
+        \`tailor_db\`.m_user
+        left join \`tailor_db\`.m_charge_person
         on m_user.userId = m_charge_person.userId
-        left join \`tailor-db\`.m_shop
+        left join \`tailor_db\`.m_shop
         on m_charge_person.shopId = m_shop.shopId
       where
         m_user.userId = "${userId}" 

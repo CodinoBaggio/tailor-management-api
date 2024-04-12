@@ -89,7 +89,7 @@ function getFabricProductNos(productName: string, searchPattern: string) {
       select 
         fabricProductNo
       from 
-        \`tailor-db\`.m_fabric_product_no 
+        \`tailor_db\`.m_fabric_product_no 
       where 
         fabricProductNo like (CONCAT('%', ?, '%')) 
     `;
@@ -139,7 +139,7 @@ function getBodySize(param: any) {
         shoulderWidth,
         jaketLength
       from 
-        \`tailor-db\`.m_size
+        \`tailor_db\`.m_size
       where 
         parts = 'jaket'
         and selectPattern2 = ?
@@ -382,7 +382,12 @@ function getPrice(param: any) {
 
   try {
     // 生地価格を取得
-    price.fabricPrice = getFabricPrice(conn, shopNo, shopGroup, param.fabricProductNo);
+    price.fabricPrice = getFabricPrice(
+      conn,
+      shopNo,
+      shopGroup,
+      param.fabricProductNo
+    );
 
     // 工賃を取得
     price.wages = getWages(conn, shopGroup, param.productName);
@@ -429,7 +434,7 @@ function getFabricPrice(
       select 
         * 
       from 
-        \`tailor-db\`.m_fabric_price 
+        \`tailor_db\`.m_fabric_price 
       where 
         shopNo = ? 
         and shopGroup = ?
@@ -443,13 +448,17 @@ function getFabricPrice(
   return results.next() ? results.getFloat('price') : 0;
 }
 
-function getWages(conn: GoogleAppsScript.JDBC.JdbcConnection, shopGroup: string, productName: string) {
+function getWages(
+  conn: GoogleAppsScript.JDBC.JdbcConnection,
+  shopGroup: string,
+  productName: string
+) {
   // 生地価格を取得
   const sql = `
       select 
         * 
       from 
-        \`tailor-db\`.m_wages 
+        \`tailor_db\`.m_wages 
       where 
         shopGroup = ?
         and productName = ?

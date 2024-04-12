@@ -33,10 +33,10 @@ function getShops() {
         m_user.updateDateTime,
         m_user.updateUserId
       from
-        \`tailor-db\`.m_shop
-        left join \`tailor-db\`.m_charge_person
+        \`tailor_db\`.m_shop
+        left join \`tailor_db\`.m_charge_person
         on m_shop.shopId = m_charge_person.shopId
-        left join \`tailor-db\`.m_user
+        left join \`tailor_db\`.m_user
         on m_charge_person.userId = m_user.userId
       `
     );
@@ -68,11 +68,11 @@ function getShops() {
         roleId: results.getString('roleId'),
       });
     }
-    
+
     // @ts-ignore
     const _ = LodashGS.load();
     const shops: ShopType[] = [];
-    const grouped = _.groupBy(items, 'shopId')
+    const grouped = _.groupBy(items, 'shopId');
     _.forEach(grouped, (value: any, key: string) => {
       const shop = {
         shopId: key,
@@ -245,10 +245,10 @@ function getUsers(): {
         m_shop.updateDateTime as shopUpdateDateTime,
         m_shop.updateUserId as shopUpdateUserId
       from
-        \`tailor-db\`.m_user
-        left join \`tailor-db\`.m_charge_person
+        \`tailor_db\`.m_user
+        left join \`tailor_db\`.m_charge_person
         on m_user.userId = m_charge_person.userId
-        left join \`tailor-db\`.m_shop
+        left join \`tailor_db\`.m_shop
         on m_charge_person.shopId = m_shop.shopId
       `
     );
@@ -415,7 +415,7 @@ function createUser(user: UserType): {
       dbUtils.executeUpdate(
         conn,
         `
-        insert into m_charge_person 
+        insert into    
         (chargePersonId, userId, shopId, isDelete, createDateTime, createUserId, updateDateTime, updateUserId) 
         values (
           "${nextSeq.chargePersonSeq(conn)}", 

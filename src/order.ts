@@ -5,7 +5,7 @@ function getOrders(roleId: string, shopId: string) {
       select
         *
       from
-        \`tailor-db\`.t_order
+        \`tailor_db\`.t_order
       where
         isDelete = 0
       order by
@@ -15,14 +15,17 @@ function getOrders(roleId: string, shopId: string) {
       select
         *
       from
-        \`tailor-db\`.t_order
+        \`tailor_db\`.t_order
       where
         shopId = '${shopId}'
         and isDelete = 0
       order by
         cast(orderId AS SIGNED) desc
     `;
-    const results = dbUtils.executeQuery(conn, (roleId = '00' ? adminSql : sql));
+    const results = dbUtils.executeQuery(
+      conn,
+      (roleId = '00' ? adminSql : sql)
+    );
     const orders: OrderBasisShortType[] = [];
     while (results.next()) {
       const orderId = results.getString('orderId');
@@ -315,12 +318,12 @@ function getOrder(orderId: string) {
         t_order_pants.*,
         t_order_vest.*
       from
-        \`tailor-db\`.t_order
-        left join \`tailor-db\`.t_order_jaket
+        \`tailor_db\`.t_order
+        left join \`tailor_db\`.t_order_jaket
         on t_order.orderId = t_order_jaket.orderId
-        left join \`tailor-db\`.t_order_pants
+        left join \`tailor_db\`.t_order_pants
         on t_order.orderId = t_order_pants.orderId
-        left join \`tailor-db\`.t_order_vest
+        left join \`tailor_db\`.t_order_vest
         on t_order.orderId = t_order_vest.orderId
       where
         t_order.orderId = '${orderId}'
@@ -373,7 +376,9 @@ function getOrder(orderId: string) {
           jaketLength: results.getFloat('t_order_jaket.jaketLength'),
           shoulderWidth: results.getFloat('t_order_jaket.shoulderWidth'),
           sleeveLengthLeft: results.getFloat('t_order_jaket.sleeveLengthLeft'),
-          sleeveLengthRight: results.getFloat('t_order_jaket.sleeveLengthRight'),
+          sleeveLengthRight: results.getFloat(
+            't_order_jaket.sleeveLengthRight'
+          ),
           bust: results.getFloat('t_order_jaket.bust'),
           waist: results.getFloat('t_order_jaket.waist'),
           bustTop: results.getFloat('t_order_jaket.bustTop'),
@@ -392,8 +397,12 @@ function getOrder(orderId: string) {
           stitch: results.getString('t_order_jaket.stitch'),
           stitchLocation: results.getString('t_order_jaket.stitchLocation'),
           pinpointStitch: results.getString('t_order_jaket.pinpointStitch'),
-          pinpointStitchThreadColor: results.getString('t_order_jaket.pinpointStitchThreadColor'),
-          chestBoxSatinFabric: results.getString('t_order_jaket.chestBoxSatinFabric'),
+          pinpointStitchThreadColor: results.getString(
+            't_order_jaket.pinpointStitchThreadColor'
+          ),
+          chestBoxSatinFabric: results.getString(
+            't_order_jaket.chestBoxSatinFabric'
+          ),
           waistPocket: results.getString('t_order_jaket.waistPocket'),
           flapWidth: results.getFloat('t_order_jaket.flapWidth'),
           changePocket: results.getString('t_order_jaket.changePocket'),
@@ -413,30 +422,50 @@ function getOrder(orderId: string) {
           nameColor: results.getString('t_order_jaket.nameColor'),
           name: results.getString('t_order_jaket.name'),
           labelHole: results.getString('t_order_jaket.labelHole'),
-          stitchThreadColor: results.getString('t_order_jaket.stitchThreadColor'),
+          stitchThreadColor: results.getString(
+            't_order_jaket.stitchThreadColor'
+          ),
           labelThreadColor: results.getString('t_order_jaket.labelThreadColor'),
-          frontButtonThreadColor: results.getString('t_order_jaket.frontButtonThreadColor'),
-          sleeveButtonThreadColor: results.getString('t_order_jaket.sleeveButtonThreadColor'),
+          frontButtonThreadColor: results.getString(
+            't_order_jaket.frontButtonThreadColor'
+          ),
+          sleeveButtonThreadColor: results.getString(
+            't_order_jaket.sleeveButtonThreadColor'
+          ),
           brandName: results.getString('t_order_jaket.brandName'),
           fabricMark: results.getString('t_order_jaket.fabricMark'),
           buttonProductNo: results.getString('t_order_jaket.buttonProductNo'),
-          sleeveOpeningTape: results.getString('t_order_jaket.sleeveOpeningTape'),
+          sleeveOpeningTape: results.getString(
+            't_order_jaket.sleeveOpeningTape'
+          ),
           sleeveElbowPatch: results.getString('t_order_jaket.sleeveElbowPatch'),
           hole: results.getString('t_order_jaket.hole'),
-          sleeveButtonHoleColor: results.getString('t_order_jaket.sleeveButtonHoleColor'),
+          sleeveButtonHoleColor: results.getString(
+            't_order_jaket.sleeveButtonHoleColor'
+          ),
           uchiai: results.getFloat('t_order_jaket.uchiai'),
           hanmi: results.getFloat('t_order_jaket.hanmi'),
           kutsumi: results.getFloat('t_order_jaket.kutsumi'),
-          squareShoulderLeft: results.getFloat('t_order_jaket.squareShoulderLeft'),
-          squareShoulderRight: results.getFloat('t_order_jaket.squareShoulderRight'),
-          slopingShoulderLeft: results.getFloat('t_order_jaket.slopingShoulderLeft'),
-          slopingShoulderRight: results.getFloat('t_order_jaket.slopingShoulderRight'),
+          squareShoulderLeft: results.getFloat(
+            't_order_jaket.squareShoulderLeft'
+          ),
+          squareShoulderRight: results.getFloat(
+            't_order_jaket.squareShoulderRight'
+          ),
+          slopingShoulderLeft: results.getFloat(
+            't_order_jaket.slopingShoulderLeft'
+          ),
+          slopingShoulderRight: results.getFloat(
+            't_order_jaket.slopingShoulderRight'
+          ),
           totsuRyo: results.getFloat('t_order_jaket.totsuRyo'),
           hip: results.getFloat('t_order_jaket.hip'),
           frontLength: results.getFloat('t_order_jaket.frontLength'),
           frontSleeveHem: results.getFloat('t_order_jaket.frontSleeveHem'),
           ahFrontOpening: results.getFloat('t_order_jaket.ahFrontOpening'),
-          sleeveOpeningWidth: results.getFloat('t_order_jaket.sleeveOpeningWidth'),
+          sleeveOpeningWidth: results.getFloat(
+            't_order_jaket.sleeveOpeningWidth'
+          ),
           collarMitsu: results.getFloat('t_order_jaket.collarMitsu'),
           collarShift: results.getFloat('t_order_jaket.collarShift'),
           buttonPosition: results.getFloat('t_order_jaket.buttonPosition'),
@@ -475,11 +504,15 @@ function getOrder(orderId: string) {
           holeThreadColor: results.getString('t_order_pants.holeThreadColor'),
           amfStitch: results.getString('t_order_pants.amfStitch'),
           sideAmf: results.getString('t_order_pants.sideAmf'),
-          stitchThreadColor: results.getString('t_order_pants.stitchThreadColor'),
+          stitchThreadColor: results.getString(
+            't_order_pants.stitchThreadColor'
+          ),
           kneepadColor: results.getString('t_order_pants.kneepadColor'),
           tackSpec: results.getString('t_order_pants.tackSpec'),
           sideSatinFabric: results.getString('t_order_pants.sideSatinFabric'),
-          pisPocketJadeGreen: results.getString('t_order_pants.pisPocketJadeGreen'),
+          pisPocketJadeGreen: results.getString(
+            't_order_pants.pisPocketJadeGreen'
+          ),
           pisPocket: results.getString('t_order_pants.pisPocket'),
           plaket: results.getString('t_order_pants.plaket'),
           buttocks: results.getFloat('t_order_pants.buttocks'),
@@ -516,7 +549,9 @@ function getOrder(orderId: string) {
           collar: results.getString('t_order_vest.collar'),
           chestPocket: results.getString('t_order_vest.chestPocket'),
           frontButton: results.getString('t_order_vest.frontButton'),
-          frontButtonHolePosition: results.getString('t_order_vest.frontButtonHolePosition'),
+          frontButtonHolePosition: results.getString(
+            't_order_vest.frontButtonHolePosition'
+          ),
           waistPocket: results.getString('t_order_vest.waistPocket'),
           backSide: results.getString('t_order_vest.backSide'),
           buckle: results.getString('t_order_vest.buckle'),
@@ -526,10 +561,18 @@ function getOrder(orderId: string) {
           uchiai: results.getFloat('t_order_vest.uchiai'),
           hanmi: results.getFloat('t_order_vest.hanmi'),
           kutsumi: results.getFloat('t_order_vest.kutsumi'),
-          squareShoulderLeft: results.getFloat('t_order_vest.squareShoulderLeft'),
-          squareShoulderRight: results.getFloat('t_order_vest.squareShoulderRight'),
-          slopingShoulderLeft: results.getFloat('t_order_vest.slopingShoulderLeft'),
-          slopingShoulderRight: results.getFloat('t_order_vest.slopingShoulderRight'),
+          squareShoulderLeft: results.getFloat(
+            't_order_vest.squareShoulderLeft'
+          ),
+          squareShoulderRight: results.getFloat(
+            't_order_vest.squareShoulderRight'
+          ),
+          slopingShoulderLeft: results.getFloat(
+            't_order_vest.slopingShoulderLeft'
+          ),
+          slopingShoulderRight: results.getFloat(
+            't_order_vest.slopingShoulderRight'
+          ),
           sickleRaising: results.getFloat('t_order_vest.sickleRaising'),
           shoulderWidth: results.getFloat('t_order_vest.shoulderWidth'),
           buttonPosition: results.getFloat('t_order_vest.buttonPosition'),
@@ -565,7 +608,7 @@ function upsertOrder(order: OrderBasisType) {
     // insert or update
     const count = dbUtils.executeQuery(
       conn,
-      `select * from \`tailor-db\`.t_order where orderId = '${order.orderId}' and isDelete = 0`
+      `select * from \`tailor_db\`.t_order where orderId = '${order.orderId}' and isDelete = 0`
     );
     const isNew = dbUtils.rowsCount(count) === 0;
     if (isNew) {
@@ -573,7 +616,7 @@ function upsertOrder(order: OrderBasisType) {
       order.orderId = nextSeq.orderSeq(conn).toString();
       const results = dbUtils.executeQuery(
         conn,
-        `select ifnull(max(seq), 0) as seq from \`tailor-db\`.t_order where shopId = '${order.shopId}'`
+        `select ifnull(max(seq), 0) as seq from \`tailor_db\`.t_order where shopId = '${order.shopId}'`
       );
       results.next();
       order.seq = results.getInt('seq') + 1;
@@ -628,9 +671,12 @@ function upsertOrder(order: OrderBasisType) {
   }
 }
 
-function upsertOrderBasis(conn: GoogleAppsScript.JDBC.JdbcConnection, order: OrderBasisType) {
+function upsertOrderBasis(
+  conn: GoogleAppsScript.JDBC.JdbcConnection,
+  order: OrderBasisType
+) {
   const sql = `
-    insert into \`tailor-db\`.t_order 
+    insert into \`tailor_db\`.t_order 
       (
         orderId, shopId, seq, orderStatus, inputDate, 
         orderDateTime, shipDate, customerName, productName, fabricMaker, 
@@ -707,9 +753,12 @@ function upsertOrderBasis(conn: GoogleAppsScript.JDBC.JdbcConnection, order: Ord
   const result = st.executeUpdate();
 }
 
-function upsertOrderJaket(conn: GoogleAppsScript.JDBC.JdbcConnection, order: OrderJaketType) {
+function upsertOrderJaket(
+  conn: GoogleAppsScript.JDBC.JdbcConnection,
+  order: OrderJaketType
+) {
   const sql = `
-    insert into \`tailor-db\`.t_order_jaket
+    insert into \`tailor_db\`.t_order_jaket
       (
         jaketOrderId,
         orderId,
@@ -992,9 +1041,12 @@ function upsertOrderJaket(conn: GoogleAppsScript.JDBC.JdbcConnection, order: Ord
   const result = st.executeUpdate();
 }
 
-function upsertOrderPants(conn: GoogleAppsScript.JDBC.JdbcConnection, order: OrderPantsType) {
+function upsertOrderPants(
+  conn: GoogleAppsScript.JDBC.JdbcConnection,
+  order: OrderPantsType
+) {
   const sql = `
-    insert into \`tailor-db\`.t_order_pants
+    insert into \`tailor_db\`.t_order_pants
       (
         pantsOrderId,
         orderId,
@@ -1162,9 +1214,12 @@ function upsertOrderPants(conn: GoogleAppsScript.JDBC.JdbcConnection, order: Ord
   const result = st.executeUpdate();
 }
 
-function upsertOrderVest(conn: GoogleAppsScript.JDBC.JdbcConnection, order: OrderVestType) {
+function upsertOrderVest(
+  conn: GoogleAppsScript.JDBC.JdbcConnection,
+  order: OrderVestType
+) {
   const sql = `
-    insert into \`tailor-db\`.t_order_vest
+    insert into \`tailor_db\`.t_order_vest
       (
         vestOrderId,
         orderId,
@@ -1292,7 +1347,7 @@ function deleteOrder(orderId: string) {
   try {
     const results = dbUtils.executeUpdate(
       conn,
-      `update \`tailor-db\`.t_order set isDelete = 1 where orderId = '${orderId}'`
+      `update \`tailor_db\`.t_order set isDelete = 1 where orderId = '${orderId}'`
     );
     conn.commit();
     return {
